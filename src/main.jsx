@@ -2,17 +2,19 @@ import './index.css';
 
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
-import App from './App.jsx';
+import HomePage from './pages/HomePage.jsx';
+import LoginPage from './pages/LoginPage.jsx';
 import ReactDOM from 'react-dom/client';
+import { Toaster } from 'sonner';
 
 const router = createBrowserRouter([
 	{
 		path: '/',
-		element: <App />,
+		element: <HomePage />,
 	},
 	{
 		path: '/login',
-		element: <p>Login</p>,
+		element: <LoginPage />,
 	},
 	{
 		path: '/products',
@@ -24,5 +26,8 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-	<RouterProvider router={router} />
+	<>
+		<Toaster />
+		<RouterProvider router={router} />
+	</>
 );
