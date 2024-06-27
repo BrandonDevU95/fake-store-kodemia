@@ -4,6 +4,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import HomePage from './pages/HomePage.jsx';
 import LoginPage from './pages/LoginPage.jsx';
+import ProductsPage from './pages/ProductsPage.jsx';
 import ReactDOM from 'react-dom/client';
 import { Toaster } from 'sonner';
 
@@ -18,7 +19,7 @@ const router = createBrowserRouter([
 	},
 	{
 		path: '/products',
-		element: <p>Products</p>,
+		element: <ProductsPage />,
 	},
 	{
 		path: '/products/:id',
