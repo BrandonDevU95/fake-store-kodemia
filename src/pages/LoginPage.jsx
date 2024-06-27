@@ -55,6 +55,7 @@ export default function LoginPage() {
 				)}
 
 				<input
+					type="password"
 					placeholder="Password"
 					className="border border-white/50 rounded p-2"
 					{...register('password', {
