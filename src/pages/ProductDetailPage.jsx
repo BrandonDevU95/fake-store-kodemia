@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react';
 
 import { getProductById } from '../api';
+import useAuth from '../hooks/useAuth';
 import { useParams } from 'react-router-dom';
 
 export default function ProductDetailPage() {
+	useAuth();
+
 	const { id } = useParams();
 	const [product, setProduct] = useState(null);
 	const [selectedImageIndex, setSelectedImageIndex] = useState(0);
