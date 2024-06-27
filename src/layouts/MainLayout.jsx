@@ -1,19 +1,27 @@
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 
 import { useState } from 'react';
 
 export default function MainLayout() {
 	const links = [
-		{ name: 'Home', path: '/' },
-		{ name: 'Products', path: '/products' },
-		{ name: 'Login', path: '/login' },
+		{ name: 'Home', path: '/', authRequired: false },
+		{ name: 'Products', path: '/products', authRequired: true },
+		{ name: 'Login', path: '/login', authRequired: false },
 	];
+	const navigate = useNavigate();
 
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
 	const toggleMobileMenu = () => {
 		setIsMobileMenuOpen(!isMobileMenuOpen);
 	};
+
+	const isAuth = !!window.localStorage.getItem('token');
+
+	function handleLogout() {
+		window.localStorage.removeItem('token');
+		navigate('/');
+	}
 
 	return (
 		<main>
@@ -53,15 +61,32 @@ export default function MainLayout() {
 						}`}
 						id="mobile-menu">
 						<ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
-							{links.map((link, index) => (
-								<li key={index}>
-									<Link
-										to={link.path}
-										className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
-										{link.name}
-									</Link>
+							{links.map((link, index) => {
+								if (link.authRequired && !isAuth) {
+									return null;
+								}
+								if (isAuth && link.path === '/login')
+									return null;
+
+								return (
+									<li key={index}>
+										<Link
+											to={link.path}
+											className="block py-2 text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-300">
+											{link.name}
+										</Link>
+									</li>
+								);
+							})}
+							{isAuth && (
+								<li>
+									<button
+										className="block py-2 text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-gray-300"
+										onClick={handleLogout}>
+										Logout
+									</button>
 								</li>
-							))}
+							)}
 						</ul>
 					</div>
 				</div>
