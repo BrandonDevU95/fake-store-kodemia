@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { login } from '../api';
 import { toast } from 'sonner';
 import { useForm } from 'react-hook-form';
@@ -9,6 +10,7 @@ export default function LoginPage() {
 		handleSubmit,
 		register,
 		formState: { errors },
+		setError,
 	} = useForm();
 
 	async function onSubmit(data) {
@@ -20,6 +22,10 @@ export default function LoginPage() {
 		} catch (error) {
 			toast.error('Invalid username or password');
 			console.error('[login error]', error);
+			setError('root.credentials', {
+				type: 'manual',
+				message: 'Invalid username or password',
+			});
 		}
 	}
 
@@ -28,11 +34,13 @@ export default function LoginPage() {
 			<h1 className="text-4xl font-bold text-center mb-4">Login</h1>
 			<form
 				onSubmit={handleSubmit(onSubmit)}
-				className="border border-white/50 text-black rounded p-4 flex flex-col gap-4 max-w-sm w-full">
+				className={clsx(
+					'border border-white/50 text-black rounded p-4 flex flex-col gap-4 max-w-sm w-full',
+					{ 'border-red-500': errors.root?.credentials }
+				)}>
 				<input
 					type="text"
 					placeholder="Username"
-					value="emilys"
 					className="border border-white/50 rounded p-2"
 					{...register('username', {
 						required: {
@@ -47,8 +55,6 @@ export default function LoginPage() {
 				)}
 
 				<input
-					type="password"
-					value="emilyspass"
 					placeholder="Password"
 					className="border border-white/50 rounded p-2"
 					{...register('password', {
