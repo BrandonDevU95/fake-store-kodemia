@@ -30,7 +30,7 @@ export default function LoginPage() {
 	}
 
 	return (
-		<main className="flex flex-col justify-center items-center w-full min-h-dvh">
+		<main className="flex flex-col justify-center items-center w-full min-h-dvh bg-gray-800">
 			<h1 className="text-4xl font-bold text-center mb-4">Login</h1>
 			<form
 				onSubmit={handleSubmit(onSubmit)}
@@ -71,7 +71,7 @@ export default function LoginPage() {
 
 				<button
 					type="submit"
-					className="bg-teal-500 font-bold p-2 text-black hover:bg-teal-300 rounded">
+					className="bg-gray-900 font-bold p-2 text-gray-100 hover:bg-gray-700 rounded">
 					Login
 				</button>
 			</form>
