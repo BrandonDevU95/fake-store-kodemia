@@ -31,70 +31,37 @@ export default function ProductDetailPage() {
 	};
 
 	return (
-		<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
+		<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-6">
 			<div className="flex flex-col md:flex-row -mx-4 dark:bg-gray-800 text-white p-6 rounded-lg shadow-md">
 				<div className="md:flex-1 px-4">
-					<div>
-						<div className="h-64 md:h-96 rounded-lg bg-gray-100 mb-4 flex items-center justify-center overflow-hidden">
-							<img
-								src={product.images[selectedImageIndex]}
-								alt={product.title}
-								className="h-full w-full object-contain rounded-lg"
-							/>
-						</div>
-						{product.images.length > 1 && (
-							<div className="flex -mx-2 mb-4">
-								{product.images.map((image, index) => (
-									<div key={index} className="flex-1 px-2">
-										<button
-											onClick={() =>
-												handleImageChange(index)
-											}
-											className={`focus:outline-none w-full rounded-lg h-24 md:h-32 bg-gray-100 flex items-center justify-center overflow-hidden ${
-												selectedImageIndex === index
-													? 'ring-2 ring-indigo-300 ring-inset'
-													: ''
-											}`}>
-											<img
-												src={image}
-												alt={`${product.title} ${index}`}
-												className="h-full w-full object-contain rounded-lg"
-											/>
-										</button>
-									</div>
-								))}
-							</div>
-						)}
+					<div className="h-64 md:h-96 rounded-lg bg-gray-100 mb-4 flex items-center justify-center overflow-hidden">
+						<img
+							src={product.images[selectedImageIndex]}
+							alt={product.title}
+							className="h-full w-full object-contain rounded-lg"
+						/>
 					</div>
-					<div>
-						<div className="mt-6">
-							<h3 className="text-lg font-semibold mb-2">
-								Reviews
-							</h3>
-							<ul className="space-y-4">
-								{product.reviews.map((review, index) => (
-									<li
-										key={index}
-										className="bg-gray-200 p-4 rounded-lg shadow-md">
-										<p className="text-gray-700">
-											<strong>
-												{review.reviewerName}
-											</strong>{' '}
-											({review.rating} stars)
-										</p>
-										<p className="text-gray-500">
-											{review.comment}
-										</p>
-										<p className="text-gray-500 text-sm">
-											{new Date(
-												review.date
-											).toLocaleDateString()}
-										</p>
-									</li>
-								))}
-							</ul>
+					{product.images.length > 1 && (
+						<div className="flex -mx-2 mb-4">
+							{product.images.map((image, index) => (
+								<div key={index} className="flex-1 px-2">
+									<button
+										onClick={() => handleImageChange(index)}
+										className={`focus:outline-none w-full rounded-lg h-24 md:h-32 bg-gray-100 flex items-center justify-center overflow-hidden ${
+											selectedImageIndex === index
+												? 'ring-2 ring-indigo-300 ring-inset'
+												: ''
+										}`}>
+										<img
+											src={image}
+											alt={`${product.title} ${index}`}
+											className="h-full w-full object-contain rounded-lg"
+										/>
+									</button>
+								</div>
+							))}
 						</div>
-					</div>
+					)}
 				</div>
 				<div className="md:flex-1 px-4">
 					<h2 className="mb-2 leading-tight tracking-tight font-bold text-indigo-600 text-2xl md:text-3xl">
