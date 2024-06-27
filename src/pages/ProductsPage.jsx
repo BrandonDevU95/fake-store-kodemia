@@ -1,8 +1,8 @@
+import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 import { getProducts } from '../api';
 import { toast } from 'sonner';
-import { useNavigate } from 'react-router-dom';
 
 export default function ProductsPage() {
 	const [products, setProducts] = useState([]);
@@ -34,19 +34,19 @@ export default function ProductsPage() {
 						<div
 							key={product.id}
 							className="bg-white shadow-md rounded-lg max-w-sm dark:bg-gray-800 dark:border-gray-700">
-							<a href="#">
+							<Link to={`/products/${product.id}`}>
 								<img
 									className="rounded-t-lg p-8"
 									src={product.thumbnail}
 									alt="product image"
 								/>
-							</a>
+							</Link>
 							<div className="px-5 pb-5">
-								<a href="#">
+								<Link to={`/products/${product.id}`}>
 									<h3 className="text-gray-900 font-semibold text-xl tracking-tight dark:text-white">
 										{product.title}
 									</h3>
-								</a>
+								</Link>
 								<div className="flex items-center mt-2.5 mb-5">
 									{[...Array(5)].map((_, index) => (
 										<svg
@@ -71,11 +71,12 @@ export default function ProductsPage() {
 									<span className="text-3xl font-bold text-gray-900 dark:text-white">
 										${product.price}
 									</span>
-									<a
+									<button
+										type="button"
 										href="#"
 										className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
 										Add to cart
-									</a>
+									</button>
 								</div>
 							</div>
 						</div>
