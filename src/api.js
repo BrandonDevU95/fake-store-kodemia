@@ -28,4 +28,14 @@ async function getProducts() {
 	return products;
 }
 
-export { login, getProducts };
+async function getProductById(id) {
+	const token = window.localStorage.getItem('token');
+	const response = await fetch(`${API_URL}/products/${id}`, {
+		method: 'GET',
+		headers: { Authorization: `Bearer ${token}` },
+	});
+	const product = await response.json();
+	return product;
+}
+
+export { login, getProducts, getProductById };
