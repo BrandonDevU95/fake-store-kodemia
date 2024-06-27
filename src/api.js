@@ -16,4 +16,16 @@ async function login(username, password) {
 	}
 }
 
-export { login };
+async function getProducts() {
+	const token = window.localStorage.getItem('token');
+	const response = await fetch(`${API_URL}/products`, {
+		method: 'GET',
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+	});
+	const { products } = await response.json();
+	return products;
+}
+
+export { login, getProducts };
